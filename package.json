@@ -1,0 +1,58 @@
+export type RateType = "fixed" | "variable";
+export type Nationality = "expat" | "national";
+export type EmploymentType = "salaried" | "self-employed";
+export type PropertyStatus = "ready" | "off-plan";
+export type PropertyType = "apartment" | "villa";
+
+export interface BankFixedRates {
+  yr1: number;
+  yr3: number;
+  yr5: number;
+}
+
+export interface Bank {
+  id: string;
+  name: string;
+  shortName: string;
+  isIslamic: boolean;
+  fixedRates: BankFixedRates;
+  variableSpread: number;
+  minLoan: number;
+  maxLoan: number;
+  maxLtvExpat: number;
+  maxLtvNational: number;
+  maxTenureYears: number;
+  processingFeePercent: number;
+  earlySettlementFeePercent: number;
+  minMonthlySalaryAED: number;
+  salaryTransferRequired: boolean;
+  applyUrl: string;
+}
+
+export interface MortgageInputs {
+  propertyPrice: number;
+  downPayment: number;
+  emirate: string;
+  propertyType: PropertyType;
+  propertyStatus: PropertyStatus;
+  nationality: Nationality;
+  employmentType: EmploymentType;
+  monthlyIncome: number;
+  existingLiabilities: number;
+  rateType: RateType;
+  fixedPeriodYears: 1 | 3 | 5;
+  tenureYears: number;
+}
+
+export interface BankResult {
+  bank: Bank;
+  loanAmount: number;
+  effectiveRate: number;
+  monthlyEMI: number;
+  totalInterest: number;
+  totalCost: number;
+  processingFee: number;
+  eligible: boolean;
+  ineligibilityReason?: string;
+  badges: string[];
+}
