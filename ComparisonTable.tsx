@@ -1,27 +1,25 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import "./globals.css";
+import Header from "@/components/Header";
+import DisclaimerBanner from "@/components/DisclaimerBanner";
 
-export default function Header() {
+export const metadata: Metadata = {
+  title: "UAE Mortgage Compare — Compare All 20 UAE Banks",
+  description: "Compare home loan rates from all 20 major UAE banks including ADCB, Emirates NBD, FAB, ADIB, DIB and more.",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <header className="text-white shadow-md" style={{ backgroundColor: "#1e3a5f" }}>
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <div
-            className="w-8 h-8 rounded flex items-center justify-center font-bold text-xs"
-            style={{ backgroundColor: "#c9a84c", color: "#1e3a5f" }}
-          >
-            UAE
-          </div>
-          <span className="text-lg font-bold">MortgageCompare</span>
-        </Link>
-        <nav className="flex gap-6 text-sm">
-          <Link href="/" className="hover:text-yellow-300 transition-colors">
-            Compare
-          </Link>
-          <Link href="/admin/rates" className="hover:text-yellow-300 transition-colors">
-            Rate Admin
-          </Link>
-        </nav>
-      </div>
-    </header>
+    <html lang="en">
+      <body className="bg-gray-50 min-h-screen">
+        <Header />
+        <main>{children}</main>
+        <DisclaimerBanner />
+        <footer className="bg-gray-900 text-gray-400 text-sm text-center py-6 mt-12">
+          <p>© {new Date().getFullYear()} UAE Mortgage Compare. For informational purposes only.</p>
+          <p className="mt-1">Not affiliated with any bank. Always verify rates directly with the bank.</p>
+        </footer>
+      </body>
+    </html>
   );
 }
